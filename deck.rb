@@ -8,8 +8,7 @@ class Deck
     @cards = []
     CARD_MARKS.each do |mark|
       CARD_NUMS.each do |num|
-        card = mark + " " + num
-        @cards.push(card)
+        @cards.push({mark: mark, num: num})
       end
     end
   end

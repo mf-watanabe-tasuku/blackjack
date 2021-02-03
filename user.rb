@@ -8,12 +8,12 @@ class User
     self.cards = card_deck.slice!(0, 2)
   end
 
-  def show_cards
-    self.cards.inject("") { |text, card| text + card + " " }
+  def draw_card(card_deck)
+    self.cards << card_deck.cards.slice!(0, 1)[0]
   end
 
-  def draw_card(card_deck)
-    card_deck.slice!(0,1)
+  def show_current_cards()
+    self.cards.inject("") { |text, card| text + card[:mark] + " " + card[:num] + " " }
   end
 
   def calculate_score(cards)

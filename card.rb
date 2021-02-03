@@ -15,6 +15,6 @@ class Card
                   }
 
   def self.get_card_strength(card)
-    CARD_STRENGTH[card.gsub(/^(❤︎|♠︎|◆|♣︎)|\s+/, "")]
+    CARD_STRENGTH[card[:num]]
   end
 end
