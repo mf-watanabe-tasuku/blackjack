@@ -1,55 +1,47 @@
 class Game
   def initialize
-    puts "★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★"
-    puts "ブラックジャックへようこそ"
-    puts "★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★"
     puts "カードを配ります"
   end
 
   def judge_game(player, dealer)
-    player_score = player.calculate_score(player.cards)
-    dealer_score = dealer.calculate_score(dealer.cards)
-    player_card_count = player.cards.length
-    dealer_card_count = dealer.cards.length
+    p_score = player.get_score()
+    d_score = dealer.get_score()
+    p_card_count = player.cards.length
+    d_card_count = dealer.cards.length
 
-    if player_score <= 21 && player_score > dealer_score ||
-       player_score == 21 && dealer_score == 21 && 
-       player_card_count < dealer_card_count
-      "あなたの勝ちです！"
-    elsif player_score > 21 && dealer_score <= 21 ||
-          player_score > 21 && dealer_score > 21 ||
-          player_score <= 21 && dealer_score <= 21 && 
-          player_score < dealer_score ||
-          player_score == 21 && dealer_score == 21 && player_card_count > dealer_card_count
-      "あなたの負けです..."
-    else
-      "勝負は引き分けです"
-    end
+    score_and_card_count = [p_score, d_score, p_card_count, d_card_count]
+
+    result =  if conditions_for_winning(*score_and_card_count)
+                "あなたの勝ちです！"
+              elsif conditions_for_losing(*score_and_card_count)
+                "あなたの負けです..."
+              else
+                "勝負は引き分けです"
+              end
+    puts result
   end
 
-  def repeat_game(player, dealer, deck, game)
-    loop {
-      puts "ゲームを繰り返しますか？(y/n)"
-      print "入力してください: "
-      select_restart = gets.chomp
-
-      if select_restart == 'y'
-        # game = self.initialize()
-        player.player_turn(dealer, deck, game)
-        return
-      elsif select_restart == 'n'
-        self.end_game()
-        return
-      else
-        puts "入力内容が正しくありません"
-        puts "==================="
-      end
-    }
+  def conditions_for_winning(p_score, d_score, p_card_count, d_card_count)
+    p_score <= 21 && p_score > d_score ||
+    p_score == 21 && d_score == 21 && p_card_count < d_card_count
   end
 
-  def end_game
-    puts "★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★"
-    puts "Thank you for playing！また遊んでね！"
-    puts "★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★"
+  def conditions_for_losing(p_score, d_score, p_card_count, d_card_count)
+    p_score > 21 && d_score <= 21 ||
+    p_score > 21 && d_score > 21 ||
+    p_score <= 21 && d_score <= 21 && p_score < d_score ||
+    p_score == 21 && d_score == 21 && p_card_count > d_card_count
+  end
+
+  def ask_repeat_game
+    puts "ゲームを繰り返しますか？(y/n)"
+    print "入力してください: "
+    select_restart = gets.chomp
+
+    main_flow() if select_restart == 'y'
+    return if select_restart == 'n'
+
+    puts "入力内容が正しくありません。再度入力してください。"
+    ask_repeat_game()
   end
 end

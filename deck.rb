@@ -1,6 +1,6 @@
 class Deck
   CARD_MARKS = ["❤︎", "♠︎", "◆", "♣︎"]
-  CARD_NUMS = [ "A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K" ]
+  CARD_NUMS = [ "A", *"2".."10", "J", "Q", "K" ]
 
   attr_accessor :cards
 
@@ -11,9 +11,6 @@ class Deck
         @cards.push({mark: mark, num: num})
       end
     end
-  end
-
-  def shuffle_cards!
-    self.cards.shuffle!
+    @cards.shuffle!
   end
 end

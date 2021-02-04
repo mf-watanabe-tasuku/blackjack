@@ -4,37 +4,72 @@ require './game'
 require './player'
 require './dealer'
 
-# 初期化
-game = Game.new
-player = Player.new
-dealer = Dealer.new
-# カードを生成する
-deck = Deck.new
-# 山札を混ぜる (Deckクラス- shuffle_cardsメソッド)
-deck.shuffle_cards!()
-# 手札を配る (Deckクラス- deal_cardsメソッド)
-player.deal_card(deck.cards)
-dealer.deal_card(deck.cards)
+puts "★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★"
+puts "ブラックジャックへようこそ"
+puts "★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★"
 
-puts "==================="
+def main_flow
+  # インスタンスを初期化
+  game = Game.new
+  deck = Deck.new
+  player = Player.new
+  dealer = Dealer.new
 
-# プレイヤーとディーラーのカードをチェック (Dealderクラス - show_cardメソッド)
-player.show_current_cards()
-player_score = player.calculate_score(player.cards)
+  # 手札を配る (Deckクラス- deal_cardsメソッド)
+  player.deal_card(deck)
+  dealer.deal_card(deck)
 
-player_card = player.show_current_cards()
-puts "あなたのカード: " + player_card
+  # 両者のカードをチェック
+  player_cards = player.show_cards()
+  dealer_card = dealer.show_start_cards()
+  puts "あなたの手札: " + player_cards
+  puts "ディーラーの手札: " + dealer_card
 
-dealer_card = dealer.show_start_cards()
-puts "ディーラーのカード: " + dealer_card
+  puts "あなたのターンです"
 
+  while true do
+    player.show_info()
 
-player.player_turn(dealer, deck, game)
+    player.select_draw_card?() ? player.draw_card(deck) : break
 
-# dealer.dealer_turn(deck, game)
+    player_score = player.get_score()
 
-# ディーラーは17以上になるまでカードを引く(バーストしたらあなたの勝ち) (Dealerクラス - draw_cardメソッド)
-# dealer.draw_card()
-# ゲームの結果を表示する (Gameクラス - judge_game_resultメソッド)
-# もう一度プレーするか選択を入力させる (Gameクラス - repeat_gameメソッド)
-# 「y」ならもう一度プレー、「n」ならゲームをやめる
+    if player_score == 21
+      puts "素晴らしい！手札の合計が21なのでディーラーのターンになります"
+      break
+    elsif player_score > 21
+      player.show_info()
+      game.judge_game(player, dealer)
+      game.ask_repeat_game()
+      return
+    end
+  end
+
+  puts "ディーラーのターンです"
+
+  while true do
+    dealer.show_info()
+
+    dealer_score = dealer.get_score()
+
+    if dealer_score > 21
+      puts "手札の合計が21を超えました。あなたの勝ちです。"
+      game.ask_repeat_game()
+      break
+    elsif dealer_score >= 17
+      puts "手札の合計が17以上なのでストップです。"
+      game.judge_game(player, dealer)
+      game.ask_repeat_game()
+      break
+    end
+
+    puts "ディーラーがカードを引きます"
+    dealer.draw_card(deck)
+  end
+end
+
+main_flow()
+
+puts "★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★"
+puts "Thank you for playing！また遊んでね！"
+puts "★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★"
