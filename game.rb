@@ -1,6 +1,6 @@
 class Game
   def initialize
-    puts "カードを配ります"
+    puts "\n=== カードを配ります ===\n\n"
   end
 
   def judge_game(player, dealer)
@@ -33,15 +33,15 @@ class Game
     p_score == 21 && d_score == 21 && p_card_count > d_card_count
   end
 
-  def ask_repeat_game
+  def repeat_game?
     puts "ゲームを繰り返しますか？(y/n)"
     print "入力してください: "
-    select_restart = gets.chomp
+    select_repeat = gets.chomp
 
-    main_flow() if select_restart == 'y'
-    return if select_restart == 'n'
+    return true if select_repeat == 'y'
+    return false if select_repeat == 'n'
 
     puts "入力内容が正しくありません。再度入力してください。"
-    ask_repeat_game()
+    repeat_game?()
   end
 end
