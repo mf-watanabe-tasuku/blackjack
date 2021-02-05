@@ -8,7 +8,7 @@ puts "★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★"
 puts "ブラックジャックへようこそ"
 puts "★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★"
 
-def main_flow
+def main
   # インスタンスを初期化
   game = Game.new
   deck = Deck.new
@@ -21,7 +21,7 @@ def main_flow
 
   # 両者のカードをチェック
   player_cards = player.show_cards()
-  dealer_card = dealer.show_start_cards()
+  dealer_card = dealer.show_start_card()
   puts "あなたの手札: " + player_cards
   puts "ディーラーの手札: " + dealer_card
 
@@ -40,7 +40,7 @@ def main_flow
     elsif player_score > 21
       player.show_info()
       game.judge_game(player, dealer)
-      game.ask_repeat_game()
+      main() if game.repeat_game?()
       return
     end
   end
@@ -54,13 +54,13 @@ def main_flow
 
     if dealer_score > 21
       puts "手札の合計が21を超えました。あなたの勝ちです。"
-      game.ask_repeat_game()
-      break
+      main() if game.repeat_game?()
+      return
     elsif dealer_score >= 17
       puts "手札の合計が17以上なのでストップです。"
       game.judge_game(player, dealer)
-      game.ask_repeat_game()
-      break
+      main() if game.repeat_game?()
+      return
     end
 
     puts "ディーラーがカードを引きます"
@@ -68,7 +68,7 @@ def main_flow
   end
 end
 
-main_flow()
+main()
 
 puts "★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★"
 puts "Thank you for playing！また遊んでね！"
