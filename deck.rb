@@ -5,7 +5,6 @@ class Deck
   attr_reader :cards
 
   def initialize
-    @cards = []
-    Array(CARD_MARKS).product(CARD_NUMS).each { |mark, num| @cards << { mark: mark, num: num } }.shuffle!
+    @cards = Array(CARD_MARKS).product(CARD_NUMS).inject([]) { |arr, item| arr << { mark: item[0], num: item[1] } }.shuffle!
   end
 end

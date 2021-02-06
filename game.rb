@@ -1,6 +1,6 @@
 class Game
   def initialize
-    puts "\n=== カードを配ります ===\n\n"
+    puts "=== カードを配ります ==="
   end
 
   def judge_game(player, dealer)
