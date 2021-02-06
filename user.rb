@@ -2,7 +2,7 @@ require './card'
 
 class User
 
-  attr_accessor :cards
+  attr_reader :cards
 
   def initialize
     @cards
@@ -27,10 +27,7 @@ class User
   def show_info
     name = self.class == Player ? "あなた" : "ディーラー"
 
-    person_cards = self.show_cards()
-    person_score = self.get_score()
-
-    puts "#{name}の手札: " + person_cards
-    puts "#{name}のスコア: " + person_score.to_s
+    puts "#{name}の手札: " + self.show_cards
+    puts "#{name}のスコア: " + self.get_score.to_s
   end
 end
