@@ -2,7 +2,7 @@ class Deck
   CARD_MARKS = ["❤︎", "♠︎", "◆", "♣︎"]
   CARD_NUMS = [ "A", *"2".."10", "J", "Q", "K" ]
 
-  attr_accessor :cards
+  attr_reader :cards
 
   def initialize
     @cards = []
