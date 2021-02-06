@@ -9,7 +9,7 @@ class User
   end
 
   def deal_card(deck)
-    @cards = deck.cards.slice!(0, 2)
+    deck.cards.slice!(0, 2)
   end
 
   def draw_card(deck)
