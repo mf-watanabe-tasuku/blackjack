@@ -2,7 +2,7 @@ require './card'
 
 class User
 
-  attr_accessor :cards
+  attr_reader :cards
 
   def initialize
     @cards
