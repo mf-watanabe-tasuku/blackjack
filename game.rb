@@ -4,8 +4,8 @@ class Game
   end
 
   def judge_game(player, dealer)
-    p_score = player.get_score()
-    d_score = dealer.get_score()
+    p_score = player.get_score
+    d_score = dealer.get_score
     p_card_count = player.cards.length
     d_card_count = dealer.cards.length
 
@@ -42,6 +42,6 @@ class Game
     return false if select_repeat == 'n'
 
     puts "入力内容が正しくありません。再度入力してください。"
-    repeat_game?()
+    repeat_game?
   end
 end

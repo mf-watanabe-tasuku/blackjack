@@ -27,8 +27,8 @@ class User
   def show_info
     name = self.class == Player ? "あなた" : "ディーラー"
 
-    person_cards = self.show_cards()
-    person_score = self.get_score()
+    person_cards = self.show_cards
+    person_score = self.get_score
 
     puts "#{name}の手札: " + person_cards
     puts "#{name}のスコア: " + person_score.to_s

@@ -20,27 +20,27 @@ def main
   dealer.deal_card(deck)
 
   # 両者のカードをチェック
-  player_cards = player.show_cards()
-  dealer_card = dealer.show_start_card()
+  player_cards = player.show_cards
+  dealer_card = dealer.show_start_card
   puts "あなたの手札: " + player_cards
   puts "ディーラーの手札: " + dealer_card
 
   puts "あなたのターンです"
 
   while true do
-    player.show_info()
+    player.show_info
 
-    player.select_draw_card?() ? player.draw_card(deck) : break
+    player.select_draw_card? ? player.draw_card(deck) : break
 
-    player_score = player.get_score()
+    player_score = player.get_score
 
     if player_score == 21
       puts "素晴らしい！手札の合計が21なのでディーラーのターンになります"
       break
     elsif player_score > 21
-      player.show_info()
+      player.show_info
       game.judge_game(player, dealer)
-      main() if game.repeat_game?()
+      main if game.repeat_game?
       return
     end
   end
@@ -48,18 +48,18 @@ def main
   puts "ディーラーのターンです"
 
   while true do
-    dealer.show_info()
+    dealer.show_info
 
-    dealer_score = dealer.get_score()
+    dealer_score = dealer.get_score
 
     if dealer_score > 21
       puts "手札の合計が21を超えました。あなたの勝ちです。"
-      main() if game.repeat_game?()
+      main if game.repeat_game?
       return
     elsif dealer_score >= 17
       puts "手札の合計が17以上なのでストップです。"
       game.judge_game(player, dealer)
-      main() if game.repeat_game?()
+      main if game.repeat_game?
       return
     end
 
@@ -68,7 +68,7 @@ def main
   end
 end
 
-main()
+main
 
 puts "★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★"
 puts "Thank you for playing！また遊んでね！"
