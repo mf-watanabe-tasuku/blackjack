@@ -9,7 +9,7 @@ class User
   end
 
   def deal_card(deck)
-    deck.cards.slice!(0, 2)
+    @cards = deck.cards.slice!(0, 2)
   end
 
   def draw_card(deck)
@@ -27,10 +27,7 @@ class User
   def show_info
     name = self.class == Player ? "あなた" : "ディーラー"
 
-    person_cards = self.show_cards
-    person_score = self.get_score
-
-    puts "#{name}の手札: " + person_cards
-    puts "#{name}のスコア: " + person_score.to_s
+    puts "#{name}の手札: " + self.show_cards
+    puts "#{name}のスコア: " + self.get_score.to_s
   end
 end

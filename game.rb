@@ -11,9 +11,9 @@ class Game
 
     score_and_card_count = [p_score, d_score, p_card_count, d_card_count]
 
-    result =  if conditions_for_winning(*score_and_card_count)
+    result =  if winning_conditions(*score_and_card_count)
                 "あなたの勝ちです！"
-              elsif conditions_for_losing(*score_and_card_count)
+              elsif losing_conditions(*score_and_card_count)
                 "あなたの負けです..."
               else
                 "勝負は引き分けです"
@@ -21,12 +21,12 @@ class Game
     puts result
   end
 
-  def conditions_for_winning(p_score, d_score, p_card_count, d_card_count)
+  def winning_conditions(p_score, d_score, p_card_count, d_card_count)
     p_score <= 21 && p_score > d_score ||
     p_score == 21 && d_score == 21 && p_card_count < d_card_count
   end
 
-  def conditions_for_losing(p_score, d_score, p_card_count, d_card_count)
+  def losing_conditions(p_score, d_score, p_card_count, d_card_count)
     p_score > 21 && d_score <= 21 ||
     p_score > 21 && d_score > 21 ||
     p_score <= 21 && d_score <= 21 && p_score < d_score ||

@@ -2,7 +2,7 @@ require './user'
 
 class Dealer < User
   def show_start_card
-    card = self.cards[0]
-    card[:mark] + " " + card[:num]
+    next_card = @cards[0]
+    [next_card[:mark], next_card[:num]].join(" ")
   end
 end

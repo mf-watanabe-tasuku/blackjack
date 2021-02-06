@@ -6,11 +6,6 @@ class Deck
 
   def initialize
     @cards = []
-    CARD_MARKS.each do |mark|
-      CARD_NUMS.each do |num|
-        @cards.push({mark: mark, num: num})
-      end
-    end
-    @cards.shuffle!
+    Array(CARD_MARKS).product(CARD_NUMS).each { |mark, num| @cards << { mark: mark, num: num } }.shuffle!
   end
 end
