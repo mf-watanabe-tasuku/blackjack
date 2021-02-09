@@ -1,4 +1,4 @@
-require './user'
+require './lib/user'
 
 class Player < User
   def select_draw_card?

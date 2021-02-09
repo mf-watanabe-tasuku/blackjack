@@ -1,9 +1,9 @@
-require './deck'
-require './card'
-require './game'
-require './player'
-require './dealer'
-require './interval'
+require './lib/deck'
+require './lib/card'
+require './lib/game'
+require './lib/player'
+require './lib/dealer'
+require './lib/interval'
 
 puts "★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★"
 puts "ブラックジャックへようこそ"

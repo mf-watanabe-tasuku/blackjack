@@ -1,4 +1,4 @@
-require './user'
+require './lib/user'
 
 class Dealer < User
   def show_start_card
